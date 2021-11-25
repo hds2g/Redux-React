@@ -21,6 +21,7 @@ const deleteToDo = id => {
 };
 
 const reducer = (state = [], action) => {
+  console.log("reducer: " + action.type +" text: "+ action.text + " id: " + Date.now() )
   switch (action.type) {
     case ADD_TODO:
       const newToDoObj = { text: action.text, id: Date.now() };
@@ -35,7 +36,7 @@ const reducer = (state = [], action) => {
 
 const store = createStore(reducer);
 
-store.subscribe(() => console.log(store.getState()));
+//store.subscribe(() => console.log(store.getState()));
 
 const dispatchAddToDo = text => {
   store.dispatch(addToDo(text));
@@ -47,7 +48,9 @@ const dispatchDeleteToDo = e => {
 };
 
 const paintToDos = () => {
+  console.log("paintToDos")
   const toDos = store.getState();
+  console.log(toDos)
   ul.innerHTML = "";
   toDos.forEach(toDo => {
     const li = document.createElement("li");
